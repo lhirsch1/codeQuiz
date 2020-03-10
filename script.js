@@ -1,5 +1,5 @@
 //app 
-var secondsCounter = 60;
+var secondsCounter = 6;
 var startBtn = document.querySelector("#btnStart");
 var timeLeft = document.querySelector("#timeClock");
 var decBtn = document.querySelector("#decrement");
@@ -10,45 +10,47 @@ var i = 0;
 var questions = [
     {
         text: 'How many words are in javascript',
+        option1: 'hello',
+        option2: 'hi',
+        option3: 'howdy',
+        option4: 'neato',
+        correct: 'hi'
+    },
+    {
+        text: 'Howdy partner',
+        option1: '1',
+        option2: '2',
+        option3: '3',
+        option4: '4',
+        correct: '1'
+    },
+    {
+        text: 'How are ya?',
         correct: '1',
         wrong1: '2',
         wrong2: '3',
         wrong3: '4'
     },
     {
-        text: 'Howdy partner',
-        correct: '5',
-        wrong1: '3',
-        wrong2: '1',
-        wrong3: '34'
-    },
-    {
-        text: 'How are ya?',
-        correct: '5',
-        wrong1: '3',
-        wrong2: '1',
-        wrong3: '34'
-    },
-    {
         text: 'How many words are in javascript',
-        correct: '5',
-        wrong1: 'meow',
-        wrong2: '1',
-        wrong3: '34'
+        correct: '1',
+        wrong1: '2',
+        wrong2: '3',
+        wrong3: '4'
     },
     {
         text: 'How are ya?',
-        correct: '5',
-        wrong1: 'p good',
-        wrong2: '1',
-        wrong3: '34'
+        correct: '1',
+        wrong1: '2',
+        wrong2: '3',
+        wrong3: '4'
     },
     {
         text: 'How are ya?',
-        correct: '5',
-        wrong1: '3',
-        wrong2: '1',
-        wrong3: '34'
+        correct: '1',
+        wrong1: '2',
+        wrong2: '3',
+        wrong3: '4'
     }
 ];
 
@@ -88,14 +90,15 @@ function showQuestion() {
     var thisQuestion = questions[i];
    
     var thisText = thisQuestion.text;
-    var thisCorrect = thisQuestion.correct;
-    var thisWrong1 = thisQuestion.wrong1;
-    var thisWrong2 = thisQuestion.wrong2;
-    var thisWrong3 = thisQuestion.wrong3;
-    console.log(" show question function ", thisText, thisCorrect);
+    var currentOpt1 = thisQuestion.option1;
+    var currentOpt2 = thisQuestion.option2;
+    var currentOpt3 = thisQuestion.option3;
+    var currentOpt4 = thisQuestion.option4;
+    var correctAns = thisQuestion.correct;
+    console.log(" show question function ", thisText, currentOpt1,currentOpt2,currentOpt3,currentOpt4);
 
     //make array of choices
-    var choices = [thisCorrect, thisWrong1, thisWrong2, thisWrong3];
+    var choices = [currentOpt1, currentOpt2, currentOpt3, currentOpt4];
     
 
     function shuffleChoices(arr){
@@ -106,16 +109,27 @@ function showQuestion() {
     console.log("choice 0 ", choices[0])
 
     questionText.innerHTML = "<h1>" +thisText+ "</h1>";
-    ans1.innerHTML = "<h2 class='ans'>" +choices[0]+ "</h2>";
-    ans2.innerHTML = "<h2 class='ans'>" +choices[1]+ "</h2>";
-    ans3.innerHTML = "<h2 class='ans'>" +choices[2]+ "</h2>";
-    ans4.innerHTML = "<h2 class='ans'>" +choices[3]+ "</h2>";
+    ans1.textContent = choices[0];
+    ans2.textContent = choices[1];
+    ans3.textContent = choices[2];
+    ans4.textContent = choices[3];
 
-    var answerTags = document.querySelector(".ans");
-    answerTags.addEventListener("click", answerFunction);
-    function answerFunction(){
-        console.log("answer  " ,this);
+    var answerBtns = document.querySelectorAll(".ans");
+    for(var ansbtn of answerBtns){
+        console.log("hi");
+        ansbtn.addEventListener('click', answerFunction);
     }
+
+    function answerFunction(){
+        if(this.textContent){
+
+
+        };
+    }
+    // answerDiv.addEventListener("click", answerFunction);
+    // function answerFunction(){
+    //     console.log("answer  ", this);
+    // }
 
     //if statement to get answer
         //if correct = show question 
