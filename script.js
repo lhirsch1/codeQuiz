@@ -1,11 +1,19 @@
 //app 
-var secondsCounter = 6;
+var secondsCounter = 60;
 var score = 0;
 var startBtn = document.querySelector("#btnStart");
 var timeLeft = document.querySelector("#timeClock");
-var decBtn = document.querySelector("#decrement");
+var decBtn  = document.querySelector("#decrement");
 var questionText = document.querySelector("#questionText");
 var i = 0;
+
+//selects question text holder
+var questionText = document.querySelector('#questionText');
+//selectors for answer boxes
+var ans1 = document.querySelector('#ans1');
+var ans2 = document.querySelector('#ans2');
+var ans3 = document.querySelector('#ans3');
+var ans4 = document.querySelector('#ans4');
 
 //create an object array of questions
 var questions = [
@@ -42,13 +50,19 @@ var questions = [
         option4: '4',
         correct: '1'
     },
+    {
+        text: 'How many words are in javascript',
+        option1: 'hello',
+        option2: 'hi',
+        option3: 'howdy',
+        option4: 'neato',
+        correct: 'hi'
+    }
 ];
 
-
-
-
+//event listener for start button initiates countdown timer
 startBtn.addEventListener("click", countDownTimer);
-decBtn.addEventListener("click", decrementTimer);
+
 
 function countDownTimer() {
     // Create the countdown timer.
@@ -68,36 +82,32 @@ function decrementTimer() {
     secondsCounter = secondsCounter - 5;
 }
 
-var questionText = document.querySelector('#questionText');
-var ans1 = document.querySelector('#ans1');
-var ans2 = document.querySelector('#ans2');
-var ans3 = document.querySelector('#ans3');
-var ans4 = document.querySelector('#ans4');
+function shuffleChoices(arr){
+    arr.sort(() => Math.random()-0.5);
+
+}
+
+
 
 
 function showQuestion() {
 
-    var thisQuestion = questions[i];
-   
-    var thisText = thisQuestion.text;
-    var currentOpt1 = thisQuestion.option1;
-    var currentOpt2 = thisQuestion.option2;
-    var currentOpt3 = thisQuestion.option3;
-    var currentOpt4 = thisQuestion.option4;
-    var correctAns = thisQuestion.correct;
+    var thisQuestion =  questions[i];
+    var thisText    =   thisQuestion.text;
+    var currentOpt1 =   thisQuestion.option1;
+    var currentOpt2 =   thisQuestion.option2;
+    var currentOpt3 =   thisQuestion.option3;
+    var currentOpt4 =   thisQuestion.option4;
+    var correctAns  =   thisQuestion.correct;
     console.log(" show question function ", thisText, currentOpt1,currentOpt2,currentOpt3,currentOpt4);
 
     //make array of choices
     var choices = [currentOpt1, currentOpt2, currentOpt3, currentOpt4];
-    
-
-    function shuffleChoices(arr){
-        arr.sort(() => Math.random()-0.5);
-
-    }
+    //function randomizes order of array
     shuffleChoices(choices);
-    console.log("choice 0 ", choices[0])
 
+
+    //DOM manipulation to change question and answer choices
     questionText.innerHTML = "<h1>" +thisText+ "</h1>";
     ans1.textContent = choices[0];
     ans2.textContent = choices[1];
@@ -106,42 +116,26 @@ function showQuestion() {
 
     var answerBtns = document.querySelectorAll(".ans");
 
-    //adds same event listener to 4 answer elements
+    //for in loop adds same event listener to 4 answer elements
     for(var ansbtn of answerBtns){
-        
         ansbtn.addEventListener('click', answerFunction);
     }
 
+    //function handles if user's choice is correct or not
     function answerFunction(){
         if(this.textContent === correctAns){
             console.log("nice!");  
             score += 10;
             i++
             console.log("score : ", score);
-            showQuestion();
+            setTimeout(showQuestion, 500);
         }
         else{
-            console.log("WRONG!")
-            decrementTimer();
+            console.log("WRONG!");
             i++;
-
+            setTimeout(showQuestion, 500);
         }
     }
-    // answerDiv.addEventListener("click", answerFunction);
-    // function answerFunction(){
-    //     console.log("answer  ", this);
-    // }
-
-    //if statement to get answer
-        //if correct = show question 
-        //if false = decrement time and show question
-        //if choices[0] text === thisCorrect
-
-    console.log(thisQuestion.text);
-    
-
-
-
 }
 
 
@@ -152,10 +146,8 @@ function showQuestion() {
 
 
 //timer 
-    //entire quiz
-    //set timer counter to 60, ever second decrement by one
-    //global variable for counter
-    //when starting quiz set to time limit
+
+    //endquiz when 0
 
 
 //score
@@ -163,19 +155,25 @@ function showQuestion() {
 
 
 //questions
-    //DOM to create elements
-    //append question and answers to framework
+    
     //determine whether user is right or wrong
     //if right:
         //display correct
         //add point to score in localstorage
-        //advance quiz question
+        //advance quiz question done
     //if wrong
         //display incorrect
-        //take 5 seconds off timer
-        //advance quiz question
+        //take 5 seconds off timer done
+        //advance quiz question done
+
+    //if no more questions end quiz
+
+    //score
+    //display when done
+    //prompt user for initials
+    //save input and score in local storage
+    //display top score
 
 
 
 
-//enter intials
