@@ -1,5 +1,6 @@
 //app 
 var secondsCounter = 6;
+var score = 0;
 var startBtn = document.querySelector("#btnStart");
 var timeLeft = document.querySelector("#timeClock");
 var decBtn = document.querySelector("#decrement");
@@ -25,33 +26,22 @@ var questions = [
         correct: '1'
     },
     {
-        text: 'How are ya?',
-        correct: '1',
-        wrong1: '2',
-        wrong2: '3',
-        wrong3: '4'
+        text: 'Howdy partner',
+        option1: '1',
+        option2: '2',
+        option3: '3',
+        option4: '4',
+        correct: '1'
     },
+
     {
-        text: 'How many words are in javascript',
-        correct: '1',
-        wrong1: '2',
-        wrong2: '3',
-        wrong3: '4'
+        text: 'Howdy partner',
+        option1: '1',
+        option2: '2',
+        option3: '3',
+        option4: '4',
+        correct: '1'
     },
-    {
-        text: 'How are ya?',
-        correct: '1',
-        wrong1: '2',
-        wrong2: '3',
-        wrong3: '4'
-    },
-    {
-        text: 'How are ya?',
-        correct: '1',
-        wrong1: '2',
-        wrong2: '3',
-        wrong3: '4'
-    }
 ];
 
 
@@ -115,16 +105,27 @@ function showQuestion() {
     ans4.textContent = choices[3];
 
     var answerBtns = document.querySelectorAll(".ans");
+
+    //adds same event listener to 4 answer elements
     for(var ansbtn of answerBtns){
-        console.log("hi");
+        
         ansbtn.addEventListener('click', answerFunction);
     }
 
     function answerFunction(){
-        if(this.textContent){
+        if(this.textContent === correctAns){
+            console.log("nice!");  
+            score += 10;
+            i++
+            console.log("score : ", score);
+            showQuestion();
+        }
+        else{
+            console.log("WRONG!")
+            decrementTimer();
+            i++;
 
-
-        };
+        }
     }
     // answerDiv.addEventListener("click", answerFunction);
     // function answerFunction(){
@@ -137,8 +138,7 @@ function showQuestion() {
         //if choices[0] text === thisCorrect
 
     console.log(thisQuestion.text);
-    i++;
-
+    
 
 
 
