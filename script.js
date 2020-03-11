@@ -1,5 +1,5 @@
 //app 
-var secondsCounter = 60;
+var secondsCounter = 10;
 var score = 0;
 var startBtn = document.querySelector("#btnStart");
 var timeLeft = document.querySelector("#timeClock");
@@ -10,10 +10,12 @@ var i = 0;
 //selects question text holder
 var questionText = document.querySelector('#questionText');
 //selectors for answer boxes
-var ans1 = document.querySelector('#ans1');
-var ans2 = document.querySelector('#ans2');
-var ans3 = document.querySelector('#ans3');
-var ans4 = document.querySelector('#ans4');
+
+var answerBtns = document.querySelectorAll(".ans");
+// var ans1 = document.querySelector('#ans1');
+// var ans2 = document.querySelector('#ans2');
+// var ans3 = document.querySelector('#ans3');
+// var ans4 = document.querySelector('#ans4');
 
 //create an object array of questions
 var questions = [
@@ -56,122 +58,34 @@ var questions = [
         option3: 'hello',
         option4: 'df',
         correct: 'hi'
-    },
-    {
-        text: 'Question 6',
-        option1: 'yee',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'yee'
-    },
-
-    {
-        text: 'Question 7',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
-    },{
-        text: 'Question 8',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
-    },
-    {
-        text: 'Question 9',
-        option1: 'yee',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'yee'
-    },
-
-    {
-        text: 'Question 10',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
-    },{
-        text: 'Question 11',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
-    },
-    {
-        text: 'Question 12',
-        option1: 'yee',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'yee'
-    },
-
-    {
-        text: 'Question 13',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
-    },{
-        text: 'Question 14',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
-    },
-    {
-        text: 'Question 15',
-        option1: 'yee',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'yee'
-    },
-
-    {
-        text: 'Question 16',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
-    },
-    {
-        text: 'Question 17 Last',
-        option1: 'hello',
-        option2: 'hi',
-        option3: 'howdy',
-        option4: 'neato',
-        correct: 'hi'
     }
+    
 ];
 
 //event listener for start button initiates countdown timer
-startBtn.addEventListener("click", countDownTimer);
+startBtn.addEventListener("click", startQuiz);
+
+//helper function launches quiz game
+function startQuiz(){
+    countDownTimer();
+    quizButtons();
+}
 
 
 function countDownTimer() {
     // Create the countdown timer.
     console.log("timer");
+
     var timerInterval = setInterval(function () {
         secondsCounter--;
         timeLeft.textContent = secondsCounter + " Seconds remaining";
-        if (secondsCounter === 0) {
+        if (secondsCounter <= 0) {
             clearInterval(timerInterval);
-            console.log("")
+            timeLeft.textContent = "Time's up!";
+            freezeQuiz();
         }
     }, 1000);
-    quizButtons();
+    
 }
 
 //function to decrement timer if question is wrong
@@ -184,9 +98,19 @@ function shuffleChoices(arr){
 
 }
 
+//function disables buttons when called
+function freezeQuiz(){
+
+    for(var ansbtn of answerBtns){
+        ansbtn.setAttribute('disabled',true);
+    }
+    
+}
+
 var j = 0;
 var correctAns;
 function quizButtons(){
+    if(secondsCounter > 0 && j < questions.length){
     var thisQuestion =  questions[j];
     var thisText    =   thisQuestion.text;
     var currentOpt1 =   thisQuestion.option1;
@@ -212,14 +136,24 @@ function quizButtons(){
     ans3.textContent = choices[2];
     ans4.textContent = choices[3];
 
-    var answerBtns = document.querySelectorAll(".ans");
+    
 
     //for in loop adds same event listener to 4 answer elements
     for(var ansbtn of answerBtns){
         ansbtn.addEventListener('click', answerFunction);
     }
     j++
+}
+else if(secondsCounter > 0 && j >= questions.length){
+    console.log("end of quiz");
+    console.log("final Score " + score);
     
+
+}
+else if(secondsCounter <= 0){
+    console.log("out of time");
+    console.log("final Score " + score);
+}
 }
     
     function answerFunction(){
@@ -229,27 +163,22 @@ function quizButtons(){
             console.log("Correct!  Score " + i);  
             i++
             
-            
+            //calls quizButtons to generate new question
             quizButtons();
             
         }
         else if(this.textContent !== correctAns){
             console.log("WRONG! Question  Score " + i);
+            
 
-            //console.log("this " + this.textContent + "  correct " + correctAns + "  i = " + i);
-           
             decrementTimer();
             quizButtons();
-            
-        }
-        else{
-            alert("Error");
-        }
-        
-        
+        }   
     }
     
-
+function scoreBoard(){
+    console.log("final score " + score);
+}
 
 
 
@@ -258,8 +187,7 @@ function quizButtons(){
 
 
 //timer 
-
-    //endquiz when 0
+//disable buttons at 0
 
 
 //score
