@@ -199,25 +199,11 @@ else if(secondsCounter <= 0){
 function scoreBoard(){
 
     
-    // if(bestScore !== null){
-    // topScore.innerHTML = topDog.inits + " Has The High Score Of " + bestScore + " Points";
-    // }
-    // else
-
-    // yourScore.innerHTML = "You Scored " + score + " Points";
+    yourScore.innerHTML = "You scored " + score + " points! <br> Please enter your initials";
     
     
 }
 
-// var testObject = { 'one': 1, 'two': 2, 'three': 3 };
-
-// // Put the object into storage
-// localStorage.setItem('testObject', JSON.stringify(testObject));
-
-// // Retrieve the object from storage
-// var retrievedObject = localStorage.getItem('testObject');
-
-// console.log('retrievedObject: ', JSON.parse(retrievedObject));
 var thisScore = {};
 var highCont = [];
 
@@ -229,8 +215,9 @@ function postScore(){
     if(score > bestScore){
         
         localStorage.setItem('user', window.JSON.stringify(thisScore));
-        bestScore = topDog.score;
+        bestScore = thisScore.score;
         topScore.innerHTML = "You set the new high score of " + bestScore + " points! Great job!";
+        yourScore.innerHTML = "Move over " + topDog.inits + " , ya chump";
 
     }
     else if(score<bestScore){
@@ -241,6 +228,7 @@ function postScore(){
         localStorage.setItem('user', window.JSON.stringify(thisScore));
         bestScore = score
         topScore.innerHTML = "You set the new high score of " + bestScore + " points! Great job!";
+        yourScore.innerHTML = "";
     }
 
     
