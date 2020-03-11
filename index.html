@@ -3,45 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Code Quiz</title>
 </head>
 
 <body>
-    <h1>Code Quiz</h1>
+
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <input type="button" value="Start" id="btnStart">
-                
-                
-
+            <div class="col-lg-12">
+                <h1>Code Quiz</h1>
             </div>
-            <div class="questionContainer">
-                <p id="timeClock"></p>
-                <div id="questionText"></div>
-                
-                <div id="answerDiv">
-                    <!-- <div class="ans" id="ans1"></div>
-                    <div class="ans" id="ans2"></div>
-                    <div class="ans" id="ans3"></div>
-                    <div class="ans" id="ans4"></div> -->
-                    <button class="ans" id="ans1"></button>
-                    <button class="ans" id="ans2"></button>
-                    <button class="ans" id="ans3"></button>
-                    <button class="ans" id="ans4"></button>
-                </div>
-                <div class="correctFalse">
+        </div>
+        <div class="row">
+            <div class="col-lg-12 " id="start">
+                <input type="button" value="Start" id="btnStart">
 
-                </div>
-                <div id="scoreboard">
-                    <div class="finalScore"></div>
-                    <input type="text" id="userInitials" maxlength="3" placeholder="Enter your initials">
-                    <button id="initialButton"></button>
-                </div>
+
 
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="questionContainer" hidden>
+                    <p id="timeClock"></p>
+                    <div id="questionText"></div>
+
+                    <div id="answerDiv">
+                        <!-- <div class="ans" id="ans1"></div>
+                            <div class="ans" id="ans2"></div>
+                            <div class="ans" id="ans3"></div>
+                            <div class="ans" id="ans4"></div> -->
+                        <button class="ans" id="ans1"></button>
+                        <button class="ans" id="ans2"></button>
+                        <button class="ans" id="ans3"></button>
+                        <button class="ans" id="ans4"></button>
+                    </div>
+                    <div id="correctFalse">
+
+                    </div>
+
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="scoreboard" hidden>
+                    <div class="finalScore"></div>
+                    <h2 id="topDog"></h2>
+                    <h2 id="yourScore"></h2>
+                    <input type="text" id="userInitials" maxlength="3" placeholder="Enter your initials">
+                    <button id="initialButton">Submit</button>
+                    <button id="reset">Play Again</button>
+    
+                </div>
+            </div>
+        </div>
+            
+
+        </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 

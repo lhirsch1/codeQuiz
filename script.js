@@ -5,6 +5,12 @@ var startBtn = document.querySelector('#btnStart');
 var timeLeft = document.querySelector("#timeClock");
 var decBtn  = document.querySelector("#decrement");
 var questionText = document.querySelector("#questionText");
+var questionContainer = document.querySelector("#questionContainer");
+var scoreContainer = document.querySelector("#scoreboard");
+var startContainer = document.querySelector("#start");
+var topScore = document.querySelector("#topDog");
+var yourScore = document.querySelector("#yourScore");
+
 var i = 0;
 
 //selects question text holder
@@ -15,6 +21,13 @@ var answerBtns = document.querySelectorAll(".ans");
 
 var initialsInput = document.querySelector('#userInitials');
 var initialButton = document.querySelector('#initialButton');
+
+
+var resetButton = document.querySelector('#reset');
+
+//gets top user score
+var topDog = JSON.parse(window.localStorage.getItem('user'));
+var bestScore;
 
 
 //create an object array of questions
@@ -64,10 +77,14 @@ var questions = [
 
 //event listener for start button initiates countdown timer
 startBtn.addEventListener("click", startQuiz);
+resetButton.addEventListener('click', playAgain);
+initialButton.addEventListener("click",postScore);
 
 
 //helper function launches quiz game
 function startQuiz(){
+    startContainer.setAttribute('hidden', true);
+    questionContainer.removeAttribute('hidden');
     countDownTimer();
     quizButtons();
 }
@@ -83,6 +100,7 @@ function countDownTimer() {
         if (secondsCounter <= 0) {
             clearInterval(timerInterval);
             timeLeft.textContent = "Time's up!";
+            scoreContainer.removeAttribute('hidden');
             freezeQuiz();
             scoreBoard();
         }
@@ -180,7 +198,13 @@ else if(secondsCounter <= 0){
     
 function scoreBoard(){
 
-    initialButton.addEventListener("click",postScore)
+    
+    // if(bestScore !== null){
+    // topScore.innerHTML = topDog.inits + " Has The High Score Of " + bestScore + " Points";
+    // }
+    // else
+
+    // yourScore.innerHTML = "You Scored " + score + " Points";
     
     
 }
@@ -194,70 +218,45 @@ function scoreBoard(){
 // var retrievedObject = localStorage.getItem('testObject');
 
 // console.log('retrievedObject: ', JSON.parse(retrievedObject));
-var obje = {};
+var thisScore = {};
 var highCont = [];
+
 function postScore(){
-    obje.inits = initialsInput.value
-    obje.score = score;
-
-    highCont.push(obje);
-    console.log(highCont);
-
-    obje = {'initials':userInitials, 'score': score}
-    //userscores.push(obj);
-    console.log(score);
-    //localStorage.setItem('highScore', JSON.stringify([obj]));
-    //var retrievedScores = localStorage.getItem('highScore');
-    //console.log("ret score ", retrievedScores.score)
-    //get highscore from local
-    //compare to new highscore
-    //if better replace
+    thisScore.inits = initialsInput.value
+    thisScore.score = score;
     
+    
+    if(score > bestScore){
+        
+        localStorage.setItem('user', window.JSON.stringify(thisScore));
+        bestScore = topDog.score;
+        topScore.innerHTML = "You set the new high score of " + bestScore + " points! Great job!";
 
-    localStorage.setItem("initials", userInitials);
-    var highScores =JSON.parse(localStorage.getItem("highScore"));
-    console.log(highScores);
+    }
+    else if(score<bestScore){
+        topScore.innerHTML = topDog.inits + " Has The High Score Of " + bestScore + " Points";
+        yourScore.innerHTML = thisScore.inits + ", your score of " + score + " is " + (bestScore-score) + " points away from the top";
+    }
+    else{
+        localStorage.setItem('user', window.JSON.stringify(thisScore));
+        bestScore = score
+        topScore.innerHTML = "You set the new high score of " + bestScore + " points! Great job!";
+    }
+
+    
     
 }
 
 function playAgain(){
-    score = 0
-    secondsCounter = 60
+    score = 0;
+    secondsCounter = 10;
+    j = 0;
+    for(var ansbtn of answerBtns){
+        ansbtn.removeAttribute('disabled');
+    }
+
     startQuiz();
 }
-
-
-
-
-
-
-//timer 
-//disable buttons at 0
-
-
-//score
-    //initialize score at 0 in localstorage
-
-
-//questions
-    
-    //determine whether user is right or wrong
-    //if right:
-        //display correct
-        //add point to score in localstorage
-        //advance quiz question done
-    //if wrong
-        //display incorrect
-        //take 5 seconds off timer done
-        //advance quiz question done
-
-    //if no more questions end quiz
-
-    //score
-    //display when done
-    //prompt user for initials
-    //save input and score in local storage
-    //display top score
 
 
 
