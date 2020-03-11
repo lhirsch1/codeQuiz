@@ -18,7 +18,7 @@ var ans4 = document.querySelector('#ans4');
 //create an object array of questions
 var questions = [
     {
-        text: 'How many words are in javascript',
+        text: 'Question 1',
         option1: 'hello',
         option2: 'hi',
         option3: 'howdy',
@@ -26,32 +26,128 @@ var questions = [
         correct: 'hi'
     },
     {
-        text: 'Howdy partner',
-        option1: '1',
-        option2: '2',
-        option3: '3',
-        option4: '4',
-        correct: '1'
+        text: 'Question 2',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
     },
     {
-        text: 'Howdy partner',
-        option1: '1',
-        option2: '2',
-        option3: '3',
-        option4: '4',
-        correct: '1'
+        text: 'Question 3',
+        option1: 'yee',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'yee'
     },
 
     {
-        text: 'Howdy partner',
-        option1: '1',
-        option2: '2',
-        option3: '3',
-        option4: '4',
-        correct: '1'
+        text: 'Question 4',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },{
+        text: 'Question 5',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
     },
     {
-        text: 'How many words are in javascript',
+        text: 'Question 6',
+        option1: 'yee',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'yee'
+    },
+
+    {
+        text: 'Question 7',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },{
+        text: 'Question 8',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },
+    {
+        text: 'Question 9',
+        option1: 'yee',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'yee'
+    },
+
+    {
+        text: 'Question 10',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },{
+        text: 'Question 11',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },
+    {
+        text: 'Question 12',
+        option1: 'yee',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'yee'
+    },
+
+    {
+        text: 'Question 13',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },{
+        text: 'Question 14',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },
+    {
+        text: 'Question 15',
+        option1: 'yee',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'yee'
+    },
+
+    {
+        text: 'Question 16',
+        option1: 'hi',
+        option2: 'boop',
+        option3: 'hello',
+        option4: 'df',
+        correct: 'hi'
+    },
+    {
+        text: 'Question 17 Last',
         option1: 'hello',
         option2: 'hi',
         option3: 'howdy',
@@ -66,6 +162,7 @@ startBtn.addEventListener("click", countDownTimer);
 
 function countDownTimer() {
     // Create the countdown timer.
+    console.log("timer");
     var timerInterval = setInterval(function () {
         secondsCounter--;
         timeLeft.textContent = secondsCounter + " Seconds remaining";
@@ -74,7 +171,7 @@ function countDownTimer() {
             console.log("")
         }
     }, 1000);
-    showQuestion();
+    quizButtons();
 }
 
 //function to decrement timer if question is wrong
@@ -87,19 +184,20 @@ function shuffleChoices(arr){
 
 }
 
-
-
-
-function showQuestion() {
-
-    var thisQuestion =  questions[i];
+var j = 0;
+var correctAns;
+function quizButtons(){
+    var thisQuestion =  questions[j];
     var thisText    =   thisQuestion.text;
     var currentOpt1 =   thisQuestion.option1;
     var currentOpt2 =   thisQuestion.option2;
     var currentOpt3 =   thisQuestion.option3;
     var currentOpt4 =   thisQuestion.option4;
-    var correctAns  =   thisQuestion.correct;
-    console.log(" show question function ", thisText, currentOpt1,currentOpt2,currentOpt3,currentOpt4);
+    correctAns  =   thisQuestion.correct;
+
+    console.log(i + " i");
+    console.log(j + " j")
+    
 
     //make array of choices
     var choices = [currentOpt1, currentOpt2, currentOpt3, currentOpt4];
@@ -120,23 +218,37 @@ function showQuestion() {
     for(var ansbtn of answerBtns){
         ansbtn.addEventListener('click', answerFunction);
     }
-
-    //function handles if user's choice is correct or not
+    j++
+    
+}
+    
     function answerFunction(){
+        console.log(this);
         if(this.textContent === correctAns){
-            console.log("nice!");  
             score += 10;
+            console.log("Correct!  Score " + i);  
             i++
-            console.log("score : ", score);
-            setTimeout(showQuestion, 500);
+            
+            
+            quizButtons();
+            
+        }
+        else if(this.textContent !== correctAns){
+            console.log("WRONG! Question  Score " + i);
+
+            //console.log("this " + this.textContent + "  correct " + correctAns + "  i = " + i);
+           
+            decrementTimer();
+            quizButtons();
+            
         }
         else{
-            console.log("WRONG!");
-            i++;
-            setTimeout(showQuestion, 500);
+            alert("Error");
         }
+        
+        
     }
-}
+    
 
 
 
