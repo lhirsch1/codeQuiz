@@ -1,5 +1,5 @@
 //app 
-var secondsCounter = 10;
+var secondsCounter = 25;
 var score = 0;
 var startBtn = document.querySelector('#btnStart');
 var timeLeft = document.querySelector("#timeClock");
@@ -33,44 +33,44 @@ var bestScore;
 //create an object array of questions
 var questions = [
     {
-        text: 'Question 1',
-        option1: 'hello',
-        option2: 'hi',
-        option3: 'howdy',
-        option4: 'neato',
-        correct: 'hi'
+        text: 'What Does DOM Stand for?',
+        option1: 'Document Object Model',
+        option2: 'Do our Mowing',
+        option3: 'Dont omit message',
+        option4: 'Donut on Monday',
+        correct: 'Document Object Model'
     },
     {
-        text: 'Question 2',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
+        text: 'What is a method?',
+        option1: 'a skateboard trick',
+        option2: 'function in an object',
+        option3: 'a way to do something',
+        option4: 'a variable',
+        correct: 'function in an object'
     },
     {
-        text: 'Question 3',
-        option1: 'yee',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'yee'
+        text: 'Is Java the same thing as JavaScript?',
+        option1: 'No',
+        option2: 'Yes',
+        option3: 'Maybe',
+        option4: 'Sometimes',
+        correct: 'Yes'
     },
 
     {
-        text: 'Question 4',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
+        text: 'What does CSS stand for?',
+        option1: 'Cascading style sheet',
+        option2: 'cat surf sand',
+        option3: 'clip shoe sandal',
+        option4: 'corn slap soup',
+        correct: 'Cascading style sheet'
     }, {
-        text: 'Question 5',
-        option1: 'hi',
-        option2: 'boop',
-        option3: 'hello',
-        option4: 'df',
-        correct: 'hi'
+        text: 'What does HTML stand for?',
+        option1: 'Hyper Text Markup Language',
+        option2: 'hello to my llama',
+        option3: 'hi to my llamas',
+        option4: 'hope to miss lent',
+        correct: 'Hyper Text Markup Language'
     }
 
 ];
@@ -246,7 +246,7 @@ function postScore() {
 //playagain resets some variables and preps app to relaunch without reloading page
 function playAgain() {
     score = 0;
-    secondsCounter = 10;
+    secondsCounter = 25;
     j = 0;
 
     startContainer.setAttribute('hidden', true);
