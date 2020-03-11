@@ -1,7 +1,7 @@
 //app 
 var secondsCounter = 10;
 var score = 0;
-var startBtn = document.querySelector("#btnStart");
+var startBtn = document.querySelector('#btnStart');
 var timeLeft = document.querySelector("#timeClock");
 var decBtn  = document.querySelector("#decrement");
 var questionText = document.querySelector("#questionText");
@@ -9,13 +9,13 @@ var i = 0;
 
 //selects question text holder
 var questionText = document.querySelector('#questionText');
-//selectors for answer boxes
 
+//selects answer option boxes
 var answerBtns = document.querySelectorAll(".ans");
-// var ans1 = document.querySelector('#ans1');
-// var ans2 = document.querySelector('#ans2');
-// var ans3 = document.querySelector('#ans3');
-// var ans4 = document.querySelector('#ans4');
+
+var initialsInput = document.querySelector('#userInitials');
+var initialButton = document.querySelector('#initialButton');
+
 
 //create an object array of questions
 var questions = [
@@ -65,6 +65,7 @@ var questions = [
 //event listener for start button initiates countdown timer
 startBtn.addEventListener("click", startQuiz);
 
+
 //helper function launches quiz game
 function startQuiz(){
     countDownTimer();
@@ -83,6 +84,7 @@ function countDownTimer() {
             clearInterval(timerInterval);
             timeLeft.textContent = "Time's up!";
             freezeQuiz();
+            scoreBoard();
         }
     }, 1000);
     
@@ -177,9 +179,52 @@ else if(secondsCounter <= 0){
     }
     
 function scoreBoard(){
-    console.log("final score " + score);
+
+    initialButton.addEventListener("click",postScore)
+    
+    
 }
 
+// var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// // Put the object into storage
+// localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// // Retrieve the object from storage
+// var retrievedObject = localStorage.getItem('testObject');
+
+// console.log('retrievedObject: ', JSON.parse(retrievedObject));
+var obje = {};
+var highCont = [];
+function postScore(){
+    obje.inits = initialsInput.value
+    obje.score = score;
+
+    highCont.push(obje);
+    console.log(highCont);
+
+    obje = {'initials':userInitials, 'score': score}
+    //userscores.push(obj);
+    console.log(score);
+    //localStorage.setItem('highScore', JSON.stringify([obj]));
+    //var retrievedScores = localStorage.getItem('highScore');
+    //console.log("ret score ", retrievedScores.score)
+    //get highscore from local
+    //compare to new highscore
+    //if better replace
+    
+
+    localStorage.setItem("initials", userInitials);
+    var highScores =JSON.parse(localStorage.getItem("highScore"));
+    console.log(highScores);
+    
+}
+
+function playAgain(){
+    score = 0
+    secondsCounter = 60
+    startQuiz();
+}
 
 
 
